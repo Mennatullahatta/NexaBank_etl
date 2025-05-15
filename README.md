@@ -1,7 +1,3 @@
-Thanks for your patience. Here's your **entire `README.md` as one continuous text block** — **no code fences**, no interruptions, no markdown fences — just a single copy-paste-ready chunk you can drop directly into your `README.md` file:
-
----
-
 # NexaBank ETL Pipeline
 
 This project implements a scalable, modular ETL pipeline designed for banking and transactional data. It uses a multithreaded producer-consumer pattern to monitor new data files, validate them, transform the data, and load it efficiently into a data lake in Parquet format and HDFS.
@@ -138,6 +134,3 @@ Developed by
 🔗 [https://github.com/HaniaHesham99](https://github.com/HaniaHesham99)
 **Mennatullah ?** 
 🔗 [https://github.com/Mennatullahatta](https://github.com/Mennatullahatta)
-
-
----
