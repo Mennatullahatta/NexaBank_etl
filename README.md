@@ -57,41 +57,39 @@ Here is a cleaned-up, clear and well-formatted version that looks good in Markdo
 
 
 
-```markdown
 ## 📁 Project Structure
 
-```
 
 src/
 ├── main.py
-├── file\_monitor/
-│   └── file\_monitor.py
-├── pipeline/
-│   ├── pipeline.py
-│   ├── extractors/
-│   │   ├── csv\_extractor.py
-│   │   ├── json\_extractor.py
-│   │   └── txt\_extractor.py
-│   ├── validators/
-│   │   └── schema\_validator.py
-│   ├── transformers/
-│   │   ├── customer\_transformers.py
-│   │   ├── credit\_transformers.py
-│   │   ├── loans\_transformers.py
-│   │   ├── money\_transfers\_transformers.py
-│   │   └── support\_transformers.py
-│   ├── loaders/
-│   │   ├── parquet\_loader.py
-│   │   └── hdfs\_loader.py
-│   ├── logger/
-│   │   └── logger.py
-│   ├── notifier/
-│   │   └── email\_notifier.py
-│   ├── state\_store/
-│   │   └── state.py
-│   └── support/
-│       ├── schemas.json
-│       └── english\_words.txt
+├── file_monitor/ # Contains FileMonitor logic for monitoring and queuing files
+│ └── file_monitor.py
+├── pipeline/ # Main ETL modules and subfolders
+│ ├── pipeline.py # Core ETL orchestrator
+│ ├── extractors/ # Extractors for CSV, JSON, TXT files
+│ │ ├── csv_extractor.py
+│ │ ├── json_extractor.py
+│ │ └── txt_extractor.py
+│ ├── validators/ # Schema validation logic
+│ │ └── schema_validator.py
+│ ├── transformers/ # Dataset-specific transformers
+│ │ ├── customer_transformers.py
+│ │ ├── credit_transformers.py
+│ │ ├── loans_transformers.py
+│ │ ├── money_transfers_transformers.py
+│ │ └── support_transformers.py
+│ ├── loaders/ # Data loading modules
+│ │ ├── parquet_loader.py
+│ │ └── hdfs_loader.py
+│ ├── logger/ # Logging utilities
+│ │ └── logger.py
+│ ├── notifier/ # Email notification system
+│ │ └── email_notifier.py
+│ ├── state_store/ # Tracks processed data to avoid duplicates
+│ │ └── state.py
+│ └── support/ # Support files (schemas, wordlists)
+│ ├── schemas.json
+│ └── english_words.txt
 
 
 
