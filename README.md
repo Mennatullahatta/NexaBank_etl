@@ -96,10 +96,23 @@ You can extend the supported formats by adding extractors in `src/pipeline/extra
 
   * Logs include full error details
   * Email alert is sent to the configured recipients (set in `notifier/email_notifier.py`)
-Absolutely! Here's the full section in proper **README.md format** — ready to copy and paste directly:
 
 
-## ✅ Run the ETL System
+## 📬 Email Alerts
+
+If the pipeline encounters any error:
+
+* The exception is logged
+* An email is automatically sent to the configured address with error details
+
+## 📂 HDFS Integration
+
+- Final DataFrames are first saved locally as `.parquet` using a **ParquetLoader** class, typically into a temporary directory.
+- The **HdfsLoader** class then moves these files into HDFS using a `subprocess` call with the `hdfs dfs -put` command.
+- The target HDFS directory is configured to align with **Hive external tables**, enabling direct querying from Hive.
+- Ensure Hadoop is installed and properly configured in the environment for successful upload and Hive integration.
+
+  ## ✅ Run the ETL System
 
 1. **Start the services using Docker Compose**
 
@@ -119,21 +132,6 @@ Absolutely! Here's the full section in proper **README.md format** — ready to 
    cd src/
    python main.py
    ```
-
-
-## 📬 Email Alerts
-
-If the pipeline encounters any error:
-
-* The exception is logged
-* An email is automatically sent to the configured address with error details
-
-## 📂 HDFS Integration
-
-- Final DataFrames are first saved locally as `.parquet` using a **ParquetLoader** class, typically into a temporary directory.
-- The **HdfsLoader** class then moves these files into HDFS using a `subprocess` call with the `hdfs dfs -put` command.
-- The target HDFS directory is configured to align with **Hive external tables**, enabling direct querying from Hive.
-- Ensure Hadoop is installed and properly configured in the environment for successful upload and Hive integration.
 
 
 ## 👥 Contributors
