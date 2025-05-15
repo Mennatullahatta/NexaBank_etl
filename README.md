@@ -46,13 +46,18 @@ Pipeline steps:
 
 ## 📁 Project Structure
 
+
+```markdown
+## 📁 Project Structure
+
+```
+
 src/
+├── main.py                      # Entry point of the system: creates a Pipeline instance, passes it to FileMonitor, and starts the monitoring
 ├── file\_monitor/                # Contains FileMonitor: monitors folders, queues files, and drives the producer-consumer pattern
 │   └── file\_monitor.py          # Starts two threads: one detects new files and enqueues them, the other pulls from the queue and passes files to the pipeline
 
 ├── pipeline/                    # Contains all ETL logic (extraction, validation, transformation, loading, and error handling)
-│   ├── main.py                  # Entry point of the system: creates a Pipeline instance, passes it to FileMonitor, and starts the monitoring process
-
 │   ├── pipeline.py              # Core controller: orchestrates the ETL stages (extract, validate, filter via state store, transform, load)
 │                                # - Selects extractor by file extension (.csv, .json, .txt)
 │                                # - Validates data using schema
@@ -88,12 +93,11 @@ src/
 │   │   └── state.py             # Reads/writes per-file state and filters already-processed rows
 
 │   └── support/                 # Contains schema definitions and helper files
-│   ├── schemas.json         # JSON Schema definitions used by validators
-│   └── english\_words.txt   # A wordlist used for brute-force decryption in the loans transformation
+│       ├── schemas.json         # JSON Schema definitions used by validators
+│       └── english\_words.txt    # A wordlist used for brute-force decryption in the loans transformation
 
-✅ This version is precise, readable, and fully aligned with your actual code. It can be dropped directly into your `README.md`.
-
-Would you like me to also generate a visual diagram of the data flow next?
+```
+```
 
 
 
