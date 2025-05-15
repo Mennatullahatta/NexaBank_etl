@@ -47,57 +47,97 @@ Pipeline steps:
 ## 📁 Project Structure
 
 
+Thanks for the screenshot! I see the tree structure is getting messy with long comments in a single line. To improve readability and make it look neat in the README, you can:
+
+* Use **indented multiline comments** instead of inline comments.
+* Avoid wrapping long comments on the same line with the file or folder name.
+* Use bullet points or a description list style after the tree structure.
+
+Here is a cleaned-up, clear and well-formatted version that looks good in Markdown README:
+
+
+
 ```markdown
 ## 📁 Project Structure
 
 ```
 
 src/
-├── main.py                      # Entry point of the system: creates a Pipeline instance, passes it to FileMonitor, and starts the monitoring
-├── file\_monitor/                # Contains FileMonitor: monitors folders, queues files, and drives the producer-consumer pattern
-│   └── file\_monitor.py          # Starts two threads: one detects new files and enqueues them, the other pulls from the queue and passes files to the pipeline
-
-├── pipeline/                    # Contains all ETL logic (extraction, validation, transformation, loading, and error handling)
-│   ├── pipeline.py              # Core controller: orchestrates the ETL stages (extract, validate, filter via state store, transform, load)
-│                                # - Selects extractor by file extension (.csv, .json, .txt)
-│                                # - Validates data using schema
-│                                # - Transforms using dataset-specific logic
-│                                # - Writes to Parquet
-│                                # - Loads into HDFS
-│                                # - Logs status and notifies on failure
-
-│   ├── extractors/              # Contains Extractor classes for different file types:
-│   │   ├── csv\_extractor.py     # Reads CSV files
-│   │   ├── json\_extractor.py    # Reads JSON files
-│   │   └── txt\_extractor.py     # Reads delimited TXT files
-
-│   ├── validators/              # SchemaValidator ensures that input data adheres to expected schema (based on JSON definitions)
-
-│   ├── transformers/            # Dataset-specific transformation logic
+├── main.py
+├── file\_monitor/
+│   └── file\_monitor.py
+├── pipeline/
+│   ├── pipeline.py
+│   ├── extractors/
+│   │   ├── csv\_extractor.py
+│   │   ├── json\_extractor.py
+│   │   └── txt\_extractor.py
+│   ├── validators/
+│   │   └── schema\_validator.py
+│   ├── transformers/
 │   │   ├── customer\_transformers.py
 │   │   ├── credit\_transformers.py
 │   │   ├── loans\_transformers.py
 │   │   ├── money\_transfers\_transformers.py
 │   │   └── support\_transformers.py
+│   ├── loaders/
+│   │   ├── parquet\_loader.py
+│   │   └── hdfs\_loader.py
+│   ├── logger/
+│   │   └── logger.py
+│   ├── notifier/
+│   │   └── email\_notifier.py
+│   ├── state\_store/
+│   │   └── state.py
+│   └── support/
+│       ├── schemas.json
+│       └── english\_words.txt
 
-│   ├── loaders/                 # Responsible for writing output data
-│   │   ├── parquet\_loader.py    # Saves cleaned DataFrame to local Parquet file (./tmp)
-│   │   └── hdfs\_loader.py       # Uploads Parquet file to HDFS using subprocess (Hive-compatible staging directory)
 
-│   ├── logger/                  # Custom logger class that writes detailed logs to ./logs/etl.log
 
-│   ├── notifier/                # Sends email notifications when the pipeline fails
-│   │   └── email\_notifier.py    # Uses SMTP (Gmail-based) to notify stakeholders
+### Descriptions:
 
-│   ├── state\_store/             # Tracks previously processed records to prevent duplicate processing
-│   │   └── state.py             # Reads/writes per-file state and filters already-processed rows
+- **main.py**  
+  Entry point: creates a Pipeline instance, passes it to FileMonitor, and starts monitoring.
 
-│   └── support/                 # Contains schema definitions and helper files
-│       ├── schemas.json         # JSON Schema definitions used by validators
-│       └── english\_words.txt    # A wordlist used for brute-force decryption in the loans transformation
+- **file_monitor/file_monitor.py**  
+  Implements FileMonitor which monitors directories, queues new files, and feeds them into the pipeline via a producer-consumer pattern.
 
-```
-```
+- **pipeline/pipeline.py**  
+  Core controller that orchestrates ETL stages: extraction, validation, filtering, transformation, loading, and error handling.
+
+- **pipeline/extractors/**  
+  Extractor classes for different file types:  
+  - `csv_extractor.py`: reads CSV files  
+  - `json_extractor.py`: reads JSON files  
+  - `txt_extractor.py`: reads delimited TXT files
+
+- **pipeline/validators/schema_validator.py**  
+  Validates input data against JSON schemas.
+
+- **pipeline/transformers/**  
+  Dataset-specific transformation logic for customers, credits, loans, money transfers, and support tickets.
+
+- **pipeline/loaders/**  
+  Responsible for writing output data:  
+  - `parquet_loader.py`: saves DataFrames as local Parquet files in `/tmp`  
+  - `hdfs_loader.py`: uploads Parquet files to HDFS compatible with Hive external tables
+
+- **pipeline/logger/logger.py**  
+  Custom logger writing detailed logs to `./logs/etl.log`.
+
+- **pipeline/notifier/email_notifier.py**  
+  Sends email notifications via SMTP (Gmail) on pipeline failures.
+
+- **pipeline/state_store/state.py**  
+  Tracks already processed records to avoid duplication.
+
+- **pipeline/support/**  
+  Helper files including:  
+  - `schemas.json`: JSON schemas for validation  
+  - `english_words.txt`: Wordlist used for brute-force decryption in loans transformation
+
+
 
 
 
