@@ -98,14 +98,14 @@ You can extend the supported formats by adding extractors in `src/pipeline/extra
   * Email alert is sent to the configured recipients (set in `notifier/email_notifier.py`)
 Absolutely! Here's the full section in proper **README.md format** — ready to copy and paste directly:
 
-````markdown
+
 ## ✅ Run the ETL System
 
 1. **Start the services using Docker Compose**
 
    ```bash
    docker-compose up -d
-````
+   ```
 
 2. **Access the `etl_py` container**
 
@@ -113,13 +113,7 @@ Absolutely! Here's the full section in proper **README.md format** — ready to 
    docker exec -it etl_py bash
    ```
 
-3. **Install dependencies inside the container**
-
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-4. **Start the ETL process**
+3. **Run the ETL process**
 
    ```bash
    cd src/
