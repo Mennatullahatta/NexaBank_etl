@@ -127,10 +127,9 @@ If the pipeline encounters any error:
 
 ## 👥 Contributors
 
-Developed by 
-**Ahmed Otifi** 
-🔗 [https://github.com/otifi3](https://github.com/otifi3)
-**Hania Hesham** 
-🔗 [https://github.com/HaniaHesham99](https://github.com/HaniaHesham99)
-**Mennatullah ?** 
-🔗 [https://github.com/Mennatullahatta](https://github.com/Mennatullahatta)
+## 👥 Contributors
+
+- **Ahmed Otifi** 🔗 [https://github.com/otifi3](https://github.com/otifi3)  
+- **Hania Hesham** 🔗 [https://github.com/HaniaHesham99](https://github.com/HaniaHesham99)  
+- **Mennatullah** 🔗 [https://github.com/Mennatullahatta](https://github.com/Mennatullahatta)
+
