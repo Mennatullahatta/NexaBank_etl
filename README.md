@@ -43,21 +43,61 @@ Pipeline steps:
 6. Upload to HDFS
 7. Log + Send email on failure
 
+
 ## 📁 Project Structure
 
 src/
-├── file\_monitor/ → file\_monitor.py (watches and queues files)
-├── pipeline/
-│   ├── main.py (starts both threads)
-│   ├── pipeline.py (ETL logic)
-│   ├── extractors/
-│   ├── validators/
-│   ├── transformers/
-│   ├── loaders/
-│   ├── logger/
-│   ├── notifier/
-│   ├── state\_store/
-│   └── support/
+├── file\_monitor/                # Contains FileMonitor: monitors folders, queues files, and drives the producer-consumer pattern
+│   └── file\_monitor.py          # Starts two threads: one detects new files and enqueues them, the other pulls from the queue and passes files to the pipeline
+
+├── pipeline/                    # Contains all ETL logic (extraction, validation, transformation, loading, and error handling)
+│   ├── main.py                  # Entry point of the system: creates a Pipeline instance, passes it to FileMonitor, and starts the monitoring process
+
+│   ├── pipeline.py              # Core controller: orchestrates the ETL stages (extract, validate, filter via state store, transform, load)
+│                                # - Selects extractor by file extension (.csv, .json, .txt)
+│                                # - Validates data using schema
+│                                # - Transforms using dataset-specific logic
+│                                # - Writes to Parquet
+│                                # - Loads into HDFS
+│                                # - Logs status and notifies on failure
+
+│   ├── extractors/              # Contains Extractor classes for different file types:
+│   │   ├── csv\_extractor.py     # Reads CSV files
+│   │   ├── json\_extractor.py    # Reads JSON files
+│   │   └── txt\_extractor.py     # Reads delimited TXT files
+
+│   ├── validators/              # SchemaValidator ensures that input data adheres to expected schema (based on JSON definitions)
+
+│   ├── transformers/            # Dataset-specific transformation logic
+│   │   ├── customer\_transformers.py
+│   │   ├── credit\_transformers.py
+│   │   ├── loans\_transformers.py
+│   │   ├── money\_transfers\_transformers.py
+│   │   └── support\_transformers.py
+
+│   ├── loaders/                 # Responsible for writing output data
+│   │   ├── parquet\_loader.py    # Saves cleaned DataFrame to local Parquet file (./tmp)
+│   │   └── hdfs\_loader.py       # Uploads Parquet file to HDFS using subprocess (Hive-compatible staging directory)
+
+│   ├── logger/                  # Custom logger class that writes detailed logs to ./logs/etl.log
+
+│   ├── notifier/                # Sends email notifications when the pipeline fails
+│   │   └── email\_notifier.py    # Uses SMTP (Gmail-based) to notify stakeholders
+
+│   ├── state\_store/             # Tracks previously processed records to prevent duplicate processing
+│   │   └── state.py             # Reads/writes per-file state and filters already-processed rows
+
+│   └── support/                 # Contains schema definitions and helper files
+│   ├── schemas.json         # JSON Schema definitions used by validators
+│   └── english\_words.txt   # A wordlist used for brute-force decryption in the loans transformation
+
+✅ This version is precise, readable, and fully aligned with your actual code. It can be dropped directly into your `README.md`.
+
+Would you like me to also generate a visual diagram of the data flow next?
+
+
+
+
 
 ## 🛠️ How It Works
 
