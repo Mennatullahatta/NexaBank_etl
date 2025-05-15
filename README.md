@@ -10,11 +10,10 @@ This project implements a scalable, modular ETL pipeline designed for banking an
 * [🛠️ How It Works](#️-how-it-works)
 * [📦 Supported Input Formats](#-supported-input-formats)
 * [📄 Logging & Notifications](#-logging--notifications)
-* [✅ Run the ETL System](#-run-the-etl-system)
 * [📬 Email Alerts](#-email-alerts)
 * [📂 HDFS Integration](#-hdfs-integration)
+* [✅ Run the ETL System](#-run-the-etl-system)
 * [👥 Contributors](#-contributors)
-* [📃 License](#-license)
 
 ## 🚀 Key Features
 
